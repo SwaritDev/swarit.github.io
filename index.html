@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lost in the Jungle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1b3a2f;
+            color: #d4f1be;
+            padding: 20px;
+        }
+        #game {
+            max-width: 600px;
+            margin: auto;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #3a7d44;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5fa96a;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>Lost in the Jungle</h1>
+        <p id="story">You wake up in a dense jungle. You can hear animals around you and the path is unclear. What do you do?</p>
+        <div id="choices">
+            <button onclick="choose('explore')">Explore the jungle</button>
+            <button onclick="choose('climb')">Climb a tree to look around</button>
+            <button onclick="choose('stay')">Stay put and wait</button>
+        </div>
+    </div>
+
+    <script>
+        function choose(action) {
+            const story = document.getElementById('story');
+            const choices = document.getElementById('choices');
+
+            if(action === 'explore') {
+                story.innerText = "You start exploring. Suddenly, you encounter a wild tiger! Do you fight, run, or climb a tree?";
+                choices.innerHTML = `
+                    <button onclick="choose('fight')">Fight</button>
+                    <button onclick="choose('run')">Run</button>
+                    <button onclick="choose('climb')">Climb a tree</button>
+                `;
+            } 
+            else if(action === 'climb') {
+                story.innerText = "You climb a tall tree. From above, you see smoke in the distance, maybe a village!";
+                choices.innerHTML = `
+                    <button onclick="choose('headVillage')">Head towards the village</button>
+                    <button onclick="choose('explore')">Go explore the jungle</button>
+                `;
+            } 
+            else if(action === 'stay') {
+                story.innerText = "You stay put. Hours pass by and night falls. It's dangerous to stay here alone.";
+                choices.innerHTML = `
+                    <button onclick="choose('explore')">Explore anyway</button>
+                    <button onclick="choose('climb')">Climb a tree to look around</button>
+                `;
+            }
+            else if(action === 'fight') {
+                story.innerText = "Unfortunately, the tiger is too strong. You barely escape with your life and retreat deeper into the jungle.";
+                choices.innerHTML = `<button onclick="choose('climb')">Climb a tree to look around</button>`;
+            }
+            else if(action === 'run') {
+                story.innerText = "You run as fast as you can and find a river. You can follow it downstream or try to cross it.";
+                choices.innerHTML = `
+                    <button onclick="choose('followRiver')">Follow the river</button>
+                    <button onclick="choose('crossRiver')">Try to cross it</button>
+                `;
+            }
+            else if(action === 'headVillage') {
+                story.innerText = "You follow the smoke and finally reach a village! You're safe. Congratulations, you survived!";
+                choices.innerHTML = `<button onclick="location.reload()">Play Again</button>`;
+            }
+            else if(action === 'followRiver') {
+                story.innerText = "Following the river, you find a small bridge and safely cross. You see a road leading out of the jungle!";
+                choices.innerHTML = `<button onclick="choose('headVillage')">Follow the road to safety</button>`;
+            }
+            else if(action === 'crossRiver') {
+                story.innerText = "The river is too strong, and you get swept away. Luckily, you reach the shore exhausted but alive.";
+                choices.innerHTML = `<button onclick="choose('climb')">Climb a tree to look around</button>`;
+            }
+        }
+    </script>
+</body>
+</html>
